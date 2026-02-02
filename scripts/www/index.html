@@ -1,88 +1,1937 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <link rel="stylesheet" href="./static/css/styles.css" />
-        <meta
-            http-equiv="Content-Security-Policy"
-            content="default-src * 'unsafe-inline' 'unsafe-eval'"
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Tauri App</title>
-        <script src="./static/js/main.js"></script>
-    </head>
-    <body>
-        <main class="container">
-            <h1>Welcome to TauriMan</h1>
+<html lang="zh-CN"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026马年新年抽签送礼小程序</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- 自定义样式 -->
+    <link href="style.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#E63946',
+                        secondary: '#FFB703',
+                        accent: '#06D6A0',
+                        dark: '#1D3557',
+                        light: '#F1FAEE',
+                        red: {
+                            50: '#FFEBEE',
+                            100: '#FFCDD2',
+                            200: '#EF9A9A',
+                            300: '#E57373',
+                            400: '#EF5350',
+                            500: '#F44336',
+                            600: '#E53935',
+                            700: '#D32F2F',
+                            800: '#C62828',
+                            900: '#B71C1C',
+                        },
+                        gold: {
+                            50: '#FFF8E1',
+                            100: '#FFECB3',
+                            200: '#FFE082',
+                            300: '#FFD54F',
+                            400: '#FFCA28',
+                            500: '#FFC107',
+                            600: '#FFB300',
+                            700: '#FFA000',
+                            800: '#FF8F00',
+                            900: '#FF6F00',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Arial', 'sans-serif'],
+                    },
+                    animation: {
+                        'spin-slow': 'spin 3s linear infinite',
+                        'bounce-slow': 'bounce 2s infinite',
+                        'wiggle': 'wiggle 1s ease-in-out infinite',
+                        'float': 'float 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        wiggle: {
+                            '0%, 100%': { transform: 'rotate(-3deg)' },
+                            '50%': { transform: 'rotate(3deg)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+            .text-shadow-lg {
+                text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+            }
+            .bg-pattern {
+                background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            }
+            .scrollbar-hide::-webkit-scrollbar {
+                display: none;
+            }
+            .scrollbar-hide {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+            .lottery-animation {
+                animation: lottery 2s ease-in-out;
+            }
+            @keyframes lottery {
+                0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
+                50% { transform: translateY(20px) rotate(5deg); opacity: 1; }
+                75% { transform: translateY(-10px) rotate(-3deg); }
+                100% { transform: translateY(0) rotate(0deg); }
+            }
+            .gift-shake {
+                animation: gift-shake 0.5s ease-in-out;
+            }
+            @keyframes gift-shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-5px) rotate(-2deg); }
+                75% { transform: translateX(5px) rotate(2deg); }
+            }
+        }
+    </style>
+    <style>
+        body {
+            background-color: #fef2f2;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .lottery-container {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .lottery-number {
+            transition: all 0.3s ease;
+        }
+        
+        .lottery-number:hover {
+            transform: scale(1.05);
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            border-radius: 50%;
+            animation: confetti-fall 3s ease-in-out forwards;
+        }
+        
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        
+        .modal-content {
+            background-color: #fff;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            animation: modal-appear 0.3s ease-out;
+        }
+        
+        @keyframes modal-appear {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #888;
+        }
+        
+        .close-button:hover {
+            color: #000;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .tab-button {
+            cursor: pointer;
+            padding: 10px 20px;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-button.active {
+            border-bottom: 2px solid #E63946;
+            color: #E63946;
+            font-weight: bold;
+        }
+        
+        .image-preview {
+            position: relative;
+            display: inline-block;
+            margin: 5px;
+        }
+        
+        .image-preview img {
+            max-width: 100px;
+            max-height: 100px;
+            border-radius: 5px;
+        }
+        
+        .remove-image {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #E63946;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            text-align: center;
+            line-height: 20px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        
+        .horse-decoration {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.8;
+            z-index: -1;
+        }
+        
+        .horse-1 {
+            top: 20px;
+            right: 20px;
+            transform: rotate(15deg);
+        }
+        
+        .horse-2 {
+            bottom: 20px;
+            left: 20px;
+            transform: rotate(-15deg);
+        }
+        
+        @media (max-width: 768px) {
+            .horse-decoration {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .horse-1 {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .horse-2 {
+                bottom: 10px;
+                left: 10px;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-b from-red-50 to-red-100 bg-pattern">
+    <div class="container mx-auto px-4 py-8 relative">
+        <!-- 装饰元素 -->
+        <div class="horse-decoration horse-1" style="background-image: url('https://p11-doubao-search-sign.byteimg.com/labis/image/816c71c2c6aaf57419188157b2418ed4~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&amp;x-expires=1785555677&amp;x-signature=Ppk4rFFLocfOWYLeWzB8MrPkvb0%3D')"></div>
+        <div class="horse-decoration horse-2" style="background-image: url('https://p3-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/2323267794676482052~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&amp;x-expires=1785555677&amp;x-signature=DMrkNky1J5JxV%2F5WBgxtYkPDeIY%3D')"></div>
+        
+        <!-- 头部 -->
+        <header class="text-center mb-8">
+            <div class="flex justify-center items-center mb-4">
+                <img src="https://p26-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/1369623108943216666~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&amp;x-expires=1785587785&amp;x-signature=5vhF0S7RU16rdHw%2BUUqz9SLXXd8%3D" alt="福" class="w-16 h-16 mr-4 animate-float">
+                <h1 class="text-4xl md:text-5xl font-bold text-red-700 text-shadow">2026马年泡泡互送抽签</h1>
+                <img src="https://p26-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/1369623108943216666~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&amp;x-expires=1785587785&amp;x-signature=5vhF0S7RU16rdHw%2BUUqz9SLXXd8%3D" alt="福" class="w-16 h-16 ml-4 animate-float">
+            </div>
+            <p class="text-lg text-red-600">新年快乐，万事如意，马到成功！</p>
+        </header>
+        
+        <!-- 主内容区 -->
+        <main class="bg-white rounded-xl shadow-xl p-6 mb-8 relative overflow-hidden">
+            <!-- 标签页导航 -->
+            <div class="flex border-b border-gray-200 mb-6">
+                <button class="tab-button active" data-tab="lottery-tab">抽签</button>
+                <button class="tab-button" data-tab="results-tab">结果汇总</button>
+                <button class="tab-button" data-tab="history-tab">抽签记录</button>
+            </div>
+            
+            <!-- 抽签标签页 -->
+            <div id="lottery-tab" class="tab-content active">
+                <!-- 人数调整区 -->
+                <div class="mb-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-bold text-red-700">参与人数</h2>
+                        <div class="flex items-center">
+                            <button id="decrease-btn" class="bg-red-200 hover:bg-red-300 text-red-700 font-bold rounded-full w-8 h-8 flex items-center justify-center mr-2 transition-all">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <span id="participant-count" class="text-lg font-bold text-red-700 w-8 text-center">11</span>
+                            <button id="increase-btn" class="bg-red-200 hover:bg-red-300 text-red-700 font-bold rounded-full w-8 h-8 flex items-center justify-center ml-2 transition-all">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 姓名填写区 -->
+                <div class="mb-6">
+                    <h2 class="text-xl font-bold text-red-700 mb-4">填写姓名</h2>
+                    <div id="name-inputs" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <!-- 姓名输入框将通过JavaScript动态生成 -->
+                    </div>
+                </div>
+                
+                <!-- 抽签操作区 -->
+                <div class="flex flex-wrap justify-center gap-4 mb-6">
+                    <button id="shuffle-btn" class="hidden bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all flex items-center">
+                        <i class="fa fa-random mr-2"></i> 打乱顺序
+                    </button>
+                    <button id="start-lottery-btn" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all flex items-center">
+                        <i class="fa fa-play mr-2"></i> 开始抽签
+                    </button>
+                    <button id="save-lottery-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all flex items-center" disabled="">
+                        <i class="fa fa-save mr-2"></i> 保存本次抽签
+                    </button>
+                    <button id="lock-btn" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all flex items-center">
+                        <i class="fa fa-lock mr-2"></i> 抽签锁定
+                    </button>
+                    <!-- <button id="reset-btn" class="bg-gray-300 hover:bg-gray-400 text-gray-700 font-bold py-3 px-6 rounded-full shadow-lg transition-all flex items-center">
+                        <i class="fa fa-refresh mr-2"></i> 重置
+                    </button> -->
+                </div>
+                
+                <!-- 抽签结果区 -->
+                <div id="lottery-results" class="hidden">
+                    <h2 class="text-xl font-bold text-red-700 mb-4">抽签结果</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="results-container">
+                        <!-- 抽签结果将通过JavaScript动态生成 -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 结果汇总标签页 -->
+            <div id="results-tab" class="tab-content">
+                <div id="summary-container" class="mb-6">
+                    <h2 class="text-xl font-bold text-red-700 mb-4">抽签匹配汇总</h2>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white rounded-lg overflow-hidden">
+                            <thead class="bg-red-100">
+                                <tr>
+                                    <th class="py-3 px-4 text-left text-red-700">抽签号码</th>
+                                    <th class="py-3 px-4 text-left text-red-700">姓名</th>
+                                    <th class="py-3 px-4 text-left text-red-700">抽中号码</th>
+                                    <th class="py-3 px-4 text-left text-red-700">抽中姓名(即 抽中了谁的礼物)</th>
+                                    <th class="py-3 px-4 text-left text-red-700">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="summary-table-body">
+                                <!-- 汇总表格内容将通过JavaScript动态生成 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div id="addresses-container" class="mb-6">
+                    <h2 class="text-xl font-bold text-red-700 mb-4">地址信息</h2>
+                    <div id="addresses-list" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- 地址信息将通过JavaScript动态生成 -->
+                    </div>
+                </div>
+                
+                <div id="images-container">
+                    <h2 class="text-xl font-bold text-red-700 mb-4">礼物图片</h2>
+                    <div id="images-gallery" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                        <!-- 礼物图片将通过JavaScript动态生成 -->
+                    </div>
+                </div>
+            </div>
 
-            <div class="row">
-                <a
-                    href="https://tauri.app"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    <img
-                        src="./assets/tauri.svg"
-                        class="logo tauri"
-                        alt="Tauri logo"
-                    />
-                </a>
-                <a
-                    href="https://pakeplus.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    <img
-                        src="https://hk.gh-proxy.org/https://github.com/Sjj1024/PakePlus/blob/main/app-icon.png"
-                        class="logo vanilla"
-                        alt="JavaScript logo"
-                    />
-                </a>
+            <!-- 抽签记录标签页 -->
+            <div id="history-tab" class="tab-content">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-red-700">抽签记录</h2>
+                    <button id="import-lottery-btn" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full shadow-lg transition-all flex items-center">
+                        <i class="fa fa-upload mr-2"></i> 导入记录
+                    </button>
+                </div>
+                <div id="lottery-history-list" class="space-y-4">
+                    <!-- 抽签记录将通过JavaScript动态生成 -->
+                    <div class="bg-gray-50 rounded-lg p-6 text-center text-gray-500">
+                        暂无抽签记录
+                    </div>
+                </div>
             </div>
-            <p>Click to get data</p>
-            <form class="row" id="greet-form">
-                <input id="greet-input" placeholder="Enter a name..." />
-                <button type="submit" id="getdata">GET DATA</button>
-            </form>
-            <div class="functions">
-                <a href="./book.html" target="_self">跳转到book.html</a>
-                <a
-                    href="https://www.baidu.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >跳到百度blank
-                </a>
-                <a
-                    href="https://www.baidu.com"
-                    target="_self"
-                    rel="noopener noreferrer"
-                >
-                    跳到百度self
-                </a>
-                <button onclick="sayHello()">点击我</button>
-                <button onclick="sayHello()">下载文件</button>
-                <button onclick="sayHello()">上传文件</button>
-                <button onclick="sayHello()">访问相机</button>
-                <button onclick="sayHello()">访问麦克风</button>
-                <button onclick="sayHello()">访问相册</button>
-                <button class="btn" onclick="openWechat()">打开微信</button>
-                <button class="btn" onclick="openWechatScan()">
-                    打开扫一扫
-                </button>
-                <button class="btn" onclick="openZhihu()">打开知乎</button>
-                <button onclick="sayHello()">打开抖音</button>
-                <button onclick="sayHello()">用浏览器打开</button>
-                <button>打开知乎</button>
-            </div>
-            <p id="greet-msg"></p>
-            <img src="./static/image/cursor.jpeg" alt="logo" />
-            <video
-                src="https://hk.gh-proxy.org/https://github.com/Sjj1024/PakePlus/blob/main/docs/static/videos/pakeplus.mp4"
-                autoplay
-                controls
-                style="width: 100%; height: 100%"
-            ></video>
-            <audio src="./static/music/yin.mp3" controls></audio>
         </main>
-    </body>
-</html>
+        
+        <!-- 底部 -->
+        <footer class="text-center text-gray-600 mt-8">
+            <p>祝您新年快乐，万事如意！</p>
+        </footer>
+    </div>
+    
+    <!-- 地址填写弹窗 -->
+    <div id="address-modal" class="modal">
+        <div class="modal-content bg-white rounded-xl shadow-2xl p-6">
+            <span class="close-button">×</span>
+            <h3 class="text-xl font-bold text-red-700 mb-4">填写收货地址</h3>
+            <form id="address-form">
+                <input type="hidden" id="address-participant-id">
+                <div class="mb-4">
+                    <label for="recipient" class="block text-gray-700 mb-2">收货人</label>
+                    <input type="text" id="recipient" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required="">
+                </div>
+                <div class="mb-4">
+                    <label for="phone" class="block text-gray-700 mb-2">联系电话</label>
+                    <input type="tel" id="phone" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required="">
+                </div>
+                <div class="mb-4">
+                    <label for="address-detail" class="block text-gray-700 mb-2">详细地址</label>
+                    <textarea id="address-detail" rows="3" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required=""></textarea>
+                </div>
+                <div class="flex justify-end">
+                    <button type="button" class="cancel-address-btn bg-gray-300 hover:bg-gray-400 text-gray-700 font-bold py-2 px-4 rounded-lg mr-2">取消</button>
+                    <button type="button" class="clear-address-btn bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg mr-2">清空</button>
+                    <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- 图片上传弹窗 -->
+    <div id="image-modal" class="modal">
+        <div class="modal-content bg-white rounded-xl shadow-2xl p-6">
+            <span class="close-button">×</span>
+            <h3 class="text-xl font-bold text-red-700 mb-4">上传礼物图片</h3>
+            <form id="image-form">
+                <input type="hidden" id="image-participant-id">
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">选择图片</label>
+                    <input type="file" id="image-upload" multiple="" accept="image/*" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
+                    <p class="text-sm text-gray-500 mt-1">支持上传多张图片</p>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">图片预览</label>
+                    <div id="image-previews" class="flex flex-wrap">
+                        <!-- 图片预览将通过JavaScript动态生成 -->
+                    </div>
+                </div>
+                <div class="flex justify-end">
+                    <button type="button" class="cancel-image-btn bg-gray-300 hover:bg-gray-400 text-gray-700 font-bold py-2 px-4 rounded-lg mr-2">取消</button>
+                    <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg">上传</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 命名保存弹窗 -->
+    <div id="save-modal" class="modal">
+        <div class="modal-content bg-white rounded-xl shadow-2xl p-6 max-w-md mx-auto">
+            <span class="close-button">×</span>
+            <h3 class="text-xl font-bold text-red-700 mb-4">保存抽签记录</h3>
+            <form id="save-form">
+                <div class="mb-4">
+                    <label for="save-name" class="block text-gray-700 mb-2">请输入记录名称</label>
+                    <input type="text" id="save-name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="例如：2026年春节抽签" required="">
+                </div>
+                <div class="flex justify-end">
+                    <button type="button" class="cancel-save-btn bg-gray-300 hover:bg-gray-400 text-gray-700 font-bold py-2 px-4 rounded-lg mr-2">取消</button>
+                    <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 导入记录弹窗 -->
+    <div id="import-modal" class="modal">
+        <div class="modal-content bg-white rounded-xl shadow-2xl p-6 max-w-md mx-auto">
+            <span class="close-button">×</span>
+            <h3 class="text-xl font-bold text-red-700 mb-4">导入抽签记录</h3>
+            <div class="mb-4">
+                <label class="block text-gray-700 mb-2">选择JSON文件</label>
+                <input type="file" id="import-file" accept=".json" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
+                <p class="text-sm text-gray-500 mt-1">请选择之前导出的抽签记录JSON文件</p>
+            </div>
+            <div class="flex justify-end">
+                <button type="button" class="cancel-import-btn bg-gray-300 hover:bg-gray-400 text-gray-700 font-bold py-2 px-4 rounded-lg mr-2">取消</button>
+                <button id="confirm-import-btn" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg">导入</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 全局变量
+        let participants = [];
+        let currentParticipantCount = 11;
+        let isLotteryCompleted = false;
+        let selectedImages = [];
+        let isLotteryLocked = false;
+        let lotteryHistory = [];
+        
+        // DOM 加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化页面
+            initializePage();
+            
+            // 事件监听
+            document.getElementById('decrease-btn').addEventListener('click', decreaseParticipants);
+            document.getElementById('increase-btn').addEventListener('click', increaseParticipants);
+            document.getElementById('shuffle-btn').addEventListener('click', shuffleParticipants);
+            document.getElementById('start-lottery-btn').addEventListener('click', startLottery);
+            document.getElementById('save-lottery-btn').addEventListener('click', saveLotteryRecord);
+            document.getElementById('lock-btn').addEventListener('click', toggleLotteryLock);
+            // document.getElementById('reset-btn').addEventListener('click', resetPage);
+            
+            // 标签页切换
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    switchTab(tabId);
+                });
+            });
+            
+            // 地址弹窗事件
+            document.getElementById('address-form').addEventListener('submit', saveAddress);
+            document.querySelector('#address-modal .close-button').addEventListener('click', closeAddressModal);
+            document.querySelector('#address-modal .cancel-address-btn').addEventListener('click', closeAddressModal);
+            document.querySelector('#address-modal .clear-address-btn').addEventListener('click', clearAddressForm);
+            
+            // 图片弹窗事件
+            document.getElementById('image-upload').addEventListener('change', handleImageSelect);
+            document.getElementById('image-form').addEventListener('submit', saveImages);
+            document.querySelector('#image-modal .close-button').addEventListener('click', closeImageModal);
+            document.querySelector('#image-modal .cancel-image-btn').addEventListener('click', closeImageModal);
+            
+            // 保存弹窗事件
+            document.getElementById('save-form').addEventListener('submit', confirmSaveLotteryRecord);
+            document.querySelector('#save-modal .close-button').addEventListener('click', closeSaveModal);
+            document.querySelector('#save-modal .cancel-save-btn').addEventListener('click', closeSaveModal);
+            
+            // 导入弹窗事件
+            document.getElementById('import-lottery-btn').addEventListener('click', function() {
+                document.getElementById('import-modal').style.display = 'block';
+            });
+            document.getElementById('confirm-import-btn').addEventListener('click', importLotteryRecord);
+            document.querySelector('#import-modal .close-button').addEventListener('click', closeImportModal);
+            document.querySelector('#import-modal .cancel-import-btn').addEventListener('click', closeImportModal);
+            
+            // 点击弹窗外部关闭弹窗
+            window.addEventListener('click', function(event) {
+                if (event.target === document.getElementById('address-modal')) {
+                    closeAddressModal();
+                }
+                if (event.target === document.getElementById('image-modal')) {
+                    closeImageModal();
+                }
+            });
+            
+            // 从本地存储加载数据
+            loadDataFromLocalStorage();
+        });
+        
+        // 初始化页面
+        function initializePage() {
+            // 生成姓名输入框
+            generateNameInputs();
+            
+            // 初始化参与者数据
+            initializeParticipants();
+        }
+        
+        // 生成姓名输入框
+        function generateNameInputs() {
+            const container = document.getElementById('name-inputs');
+            container.innerHTML = '';
+            
+            for (let i = 1; i <= currentParticipantCount; i++) {
+                const inputGroup = document.createElement('div');
+                inputGroup.className = 'flex items-center bg-red-50 rounded-lg p-3 shadow-sm';
+                inputGroup.innerHTML = `
+                    <div class="bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 font-bold">${i}</div>
+                    <input type="text" id="name-${i}" placeholder="请输入姓名" class="flex-1 px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
+                `;
+                container.appendChild(inputGroup);
+            }
+        }
+        
+        // 初始化参与者数据
+        function initializeParticipants() {
+            participants = [];
+            for (let i = 1; i <= currentParticipantCount; i++) {
+                participants.push({
+                    id: i,
+                    name: '',
+                    targetId: null,
+                    address: null,
+                    images: []
+                });
+            }
+        }
+        
+        // 减少参与人数
+        function decreaseParticipants() {
+            if (currentParticipantCount > 2) {
+                currentParticipantCount--;
+                document.getElementById('participant-count').textContent = currentParticipantCount;
+                generateNameInputs();
+                initializeParticipants();
+                updateLocalStorage();
+            }
+        }
+        
+        // 增加参与人数
+        function increaseParticipants() {
+            if (currentParticipantCount < 20) {
+                currentParticipantCount++;
+                document.getElementById('participant-count').textContent = currentParticipantCount;
+                generateNameInputs();
+                initializeParticipants();
+                updateLocalStorage();
+            }
+        }
+        
+        // 打乱顺序
+        function shuffleParticipants() {
+            console.log('开始打乱顺序...');
+            
+            // 获取所有姓名
+            const names = [];
+            for (let i = 1; i <= currentParticipantCount; i++) {
+                const nameInput = document.getElementById(`name-${i}`);
+                if (!nameInput) {
+                    console.error(`找不到姓名输入框: name-${i}`);
+                    continue;
+                }
+                const name = nameInput.value.trim();
+                if (name === '') {
+                    alert('请填写所有参与者姓名');
+                    return;
+                }
+                names.push(name);
+            }
+            
+            console.log('收集到的姓名:', names);
+            
+            // 确保参与者数组长度正确
+            if (participants.length !== currentParticipantCount) {
+                console.log('参与者数组长度不匹配，重新初始化');
+                initializeParticipants();
+            }
+            
+            // 更新参与者姓名
+            for (let i = 0; i < participants.length; i++) {
+                participants[i].name = names[i];
+            }
+            
+            console.log('更新后的参与者数据:', participants);
+            
+            // 创建目标ID数组
+            let targetIds = [];
+            for (let i = 1; i <= currentParticipantCount; i++) {
+                targetIds.push(i);
+            }
+            
+            console.log('初始目标ID数组:', targetIds);
+            
+            // 重新实现打乱逻辑，确保没有人抽中自己
+            let attempts = 0;
+            const maxAttempts = 1000; // 防止无限循环
+            
+            do {
+                // 重置目标ID数组
+                targetIds = [];
+                for (let i = 1; i <= currentParticipantCount; i++) {
+                    targetIds.push(i);
+                }
+                
+                // Fisher-Yates 洗牌算法
+                for (let i = targetIds.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [targetIds[i], targetIds[j]] = [targetIds[j], targetIds[i]];
+                }
+                
+                attempts++;
+                
+                // 检查是否有人抽中自己
+                let hasSelfMatch = false;
+                for (let i = 0; i < targetIds.length; i++) {
+                    if (targetIds[i] === i + 1) {
+                        hasSelfMatch = true;
+                        break;
+                    }
+                }
+                
+                if (!hasSelfMatch) {
+                    console.log('找到有效的打乱方案:', targetIds);
+                    break;
+                }
+                
+                if (attempts >= maxAttempts) {
+                    console.warn('达到最大尝试次数，使用可能有自匹配的方案');
+                    break;
+                }
+            } while (true);
+            
+            // 更新目标ID
+            for (let i = 0; i < participants.length; i++) {
+                participants[i].targetId = targetIds[i];
+            }
+            
+            console.log('最终参与者数据:', participants);
+            
+            // 添加视觉反馈
+            const shuffleBtn = document.getElementById('shuffle-btn');
+            shuffleBtn.disabled = true;
+            shuffleBtn.innerHTML = '<i class="fa fa-spinner fa-spin mr-2"></i> 打乱中...';
+            
+            // 短暂延迟后恢复按钮状态并显示提示
+            setTimeout(() => {
+                shuffleBtn.disabled = false;
+                shuffleBtn.innerHTML = '<i class="fa fa-random mr-2"></i> 打乱顺序';
+                
+                // 显示打乱成功提示
+                showToast('顺序打乱成功！');
+                
+                // 更新本地存储
+                updateLocalStorage();
+            }, 1000);
+        }
+        
+        // 开始抽签
+        function startLottery() {
+            // 检查是否锁定
+            if (isLotteryLocked) {
+                showToast('抽签已锁定，请先解锁');
+                return;
+            }
+            
+            // 自动执行打乱顺序
+            console.log('自动执行打乱顺序...');
+            
+            // 获取所有姓名
+            const names = [];
+            let hasEmptyName = false;
+            
+            for (let i = 1; i <= currentParticipantCount; i++) {
+                const nameInput = document.getElementById(`name-${i}`);
+                if (!nameInput) {
+                    console.error(`找不到姓名输入框: name-${i}`);
+                    continue;
+                }
+                const name = nameInput.value.trim();
+                if (name === '') {
+                    hasEmptyName = true;
+                    break;
+                }
+                names.push(name);
+            }
+            
+            if (hasEmptyName) {
+                alert('请填写所有参与者姓名');
+                return;
+            }
+            
+            console.log('收集到的姓名:', names);
+            
+            // 确保参与者数组长度正确
+            if (participants.length !== currentParticipantCount) {
+                console.log('参与者数组长度不匹配，重新初始化');
+                initializeParticipants();
+            }
+            
+            // 更新参与者姓名
+            for (let i = 0; i < participants.length; i++) {
+                participants[i].name = names[i];
+            }
+            
+            console.log('更新后的参与者数据:', participants);
+            
+            // 创建目标ID数组并打乱
+            let targetIds = [];
+            for (let i = 1; i <= currentParticipantCount; i++) {
+                targetIds.push(i);
+            }
+            
+            console.log('初始目标ID数组:', targetIds);
+            
+            // 打乱逻辑，确保没有人抽中自己
+            let attempts = 0;
+            const maxAttempts = 1000; // 防止无限循环
+            
+            do {
+                // 重置目标ID数组
+                targetIds = [];
+                for (let i = 1; i <= currentParticipantCount; i++) {
+                    targetIds.push(i);
+                }
+                
+                // Fisher-Yates 洗牌算法
+                for (let i = targetIds.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [targetIds[i], targetIds[j]] = [targetIds[j], targetIds[i]];
+                }
+                
+                attempts++;
+                
+                // 检查是否有人抽中自己
+                let hasSelfMatch = false;
+                for (let i = 0; i < targetIds.length; i++) {
+                    if (targetIds[i] === i + 1) {
+                        hasSelfMatch = true;
+                        break;
+                    }
+                }
+                
+                if (!hasSelfMatch) {
+                    console.log('找到有效的打乱方案:', targetIds);
+                    break;
+                }
+                
+                if (attempts >= maxAttempts) {
+                    console.warn('达到最大尝试次数，使用可能有自匹配的方案');
+                    break;
+                }
+            } while (true);
+            
+            // 更新目标ID
+            for (let i = 0; i < participants.length; i++) {
+                participants[i].targetId = targetIds[i];
+            }
+            
+            console.log('最终参与者数据:', participants);
+            
+            // 显示打乱成功提示
+            showToast('顺序打乱成功，开始抽签！');
+            
+            // 更新本地存储
+            updateLocalStorage();
+            
+            // 显示抽签结果区域
+            document.getElementById('lottery-results').classList.remove('hidden');
+            
+            // 清空结果容器
+            const resultsContainer = document.getElementById('results-container');
+            resultsContainer.innerHTML = '';
+            
+            // 依次显示每个参与者的抽签结果
+            let index = 0;
+            const showNextResult = () => {
+                if (index < participants.length) {
+                    const participant = participants[index];
+                    const targetParticipant = participants.find(p => p.id === participant.targetId);
+                    
+                    // 创建结果卡片
+                    const resultCard = document.createElement('div');
+                    resultCard.className = 'bg-white rounded-lg shadow-md p-4 border-l-4 border-red-500 card-hover lottery-animation';
+                    resultCard.innerHTML = `
+                        <div class="flex items-center mb-3">
+                            <div class="bg-red-600 text-white rounded-full w-10 h-10 flex items-center justify-center mr-3 font-bold text-lg">${participant.id}</div>
+                            <h3 class="text-lg font-bold text-red-700">${participant.name}</h3>
+                        </div>
+                        <div class="flex items-center justify-center my-4">
+                            <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/a1dc5ac02c1941c086226008629fde8c~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=20260202114109522AE5F5797C2D3C6806&rrcfp=f06b921b&x-expires=1772595694&x-signature=Tc23SB2pR3vQ4%2B2qInJrpDq8dwk%3D" alt="抽签筒" class="w-20 h-20 object-contain">
+                        </div>
+                        <div class="text-center mb-3">
+                            <p class="text-gray-600">抽中了</p>
+                            <div class="flex items-center justify-center mt-2">
+                                <div class="bg-red-600 text-white rounded-full w-10 h-10 flex items-center justify-center mr-3 font-bold text-lg">${targetParticipant.id}</div>
+                                <h3 class="text-lg font-bold text-red-700">${targetParticipant.name}</h3>
+                            </div>
+                        </div>
+                        <div class="flex justify-between mt-4">
+                            <button class="edit-address-btn bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded-full text-sm transition-all" data-id="${participant.id}">
+                                <i class="fa fa-map-marker mr-1"></i> 填写地址
+                            </button>
+                            <button class="upload-image-btn bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded-full text-sm transition-all" data-id="${participant.id}">
+                                <i class="fa fa-image mr-1"></i> 上传图片
+                            </button>
+                        </div>
+                    `;
+                    
+                    // 添加到结果容器
+                    resultsContainer.appendChild(resultCard);
+                    
+                    // 添加事件监听
+                    resultCard.querySelector('.edit-address-btn').addEventListener('click', function() {
+                        const participantId = parseInt(this.getAttribute('data-id'));
+                        openAddressModal(participantId);
+                    });
+                    
+                    resultCard.querySelector('.upload-image-btn').addEventListener('click', function() {
+                        const participantId = parseInt(this.getAttribute('data-id'));
+                        openImageModal(participantId);
+                    });
+                    
+                    // 创建庆祝特效
+                    createConfetti();
+                    
+                    // 延迟显示下一个结果
+                    index++;
+                    setTimeout(showNextResult, 1000);
+                } else {
+                    // 抽签完成
+                    isLotteryCompleted = true;
+                    
+                    // 更新汇总标签页
+                    updateSummaryTab();
+                    
+                    // 显示抽签完成提示
+                    showToast('抽签完成！');
+                    
+                    // 启用保存按钮
+                    document.getElementById('save-lottery-btn').disabled = false;
+                    
+                    // 更新本地存储
+                    updateLocalStorage();
+                }
+            };
+            
+            // 开始显示第一个结果
+            showNextResult();
+        }
+        
+        // 创建庆祝特效
+        function createConfetti() {
+            const container = document.querySelector('.container');
+            const colors = ['#f00', '#0f0', '#00f', '#ff0', '#f0f', '#0ff'];
+            
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                confetti.style.animationDelay = Math.random() * 2 + 's';
+                container.appendChild(confetti);
+                
+                // 动画结束后移除元素
+                confetti.addEventListener('animationend', function() {
+                    confetti.remove();
+                });
+            }
+        }
+        
+        // 切换抽签锁定状态
+        function toggleLotteryLock() {
+            isLotteryLocked = !isLotteryLocked;
+            const lockBtn = document.getElementById('lock-btn');
+            const startLotteryBtn = document.getElementById('start-lottery-btn');
+            
+            if (isLotteryLocked) {
+                // 锁定状态
+                lockBtn.innerHTML = '<i class="fa fa-unlock mr-2"></i> 抽签解锁';
+                lockBtn.classList.remove('bg-yellow-500', 'hover:bg-yellow-600');
+                lockBtn.classList.add('bg-green-500', 'hover:bg-green-600');
+                startLotteryBtn.disabled = true;
+                startLotteryBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                showToast('抽签已锁定，无法开始新的抽签');
+            } else {
+                // 解锁状态
+                lockBtn.innerHTML = '<i class="fa fa-lock mr-2"></i> 抽签锁定';
+                lockBtn.classList.remove('bg-green-500', 'hover:bg-green-600');
+                lockBtn.classList.add('bg-yellow-500', 'hover:bg-yellow-600');
+                startLotteryBtn.disabled = false;
+                startLotteryBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                showToast('抽签已解锁，可以开始新的抽签');
+            }
+            
+            // 更新本地存储
+            updateLocalStorage();
+        }
+
+        // 打开保存弹窗
+        function saveLotteryRecord() {
+            if (!isLotteryCompleted) {
+                showToast('请先完成抽签');
+                return;
+            }
+            document.getElementById('save-modal').style.display = 'block';
+        }
+
+        // 保存抽签记录
+        function confirmSaveLotteryRecord(event) {
+            event.preventDefault();
+            
+            const recordName = document.getElementById('save-name').value.trim();
+            if (!recordName) {
+                alert('请输入记录名称');
+                return;
+            }
+
+            const record = {
+                id: Date.now(),
+                name: recordName,
+                timestamp: new Date().toLocaleString('zh-CN'),
+                participants: JSON.parse(JSON.stringify(participants)),
+                participantCount: currentParticipantCount
+            };
+
+            lotteryHistory.unshift(record);
+
+            // 限制历史记录数量
+            if (lotteryHistory.length > 20) {
+                lotteryHistory.pop();
+            }
+
+            closeSaveModal();
+            showToast('抽签记录保存成功！');
+            updateHistoryDisplay();
+            updateLocalStorage();
+        }
+
+        // 更新历史记录显示
+        function updateHistoryDisplay() {
+            const historyList = document.getElementById('lottery-history-list');
+            historyList.innerHTML = '';
+
+            if (lotteryHistory.length === 0) {
+                historyList.innerHTML = `
+                    <div class="bg-gray-50 rounded-lg p-6 text-center text-gray-500">
+                        暂无抽签记录
+                    </div>
+                `;
+                return;
+            }
+
+            lotteryHistory.forEach(record => {
+                const recordCard = document.createElement('div');
+                recordCard.className = 'bg-white rounded-lg shadow-md overflow-hidden mb-6';
+                recordCard.innerHTML = `
+                    <div class="bg-red-600 text-white p-4">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-lg font-bold">${record.name}</h3>
+                            <span class="text-sm">${record.timestamp}</span>
+                        </div>
+                        <p class="text-sm mt-1">参与人数: ${record.participantCount}人</p>
+                    </div>
+                    <div class="p-4">
+                        <div class="max-h-48 overflow-y-auto mb-4">
+                            <table class="min-w-full text-sm">
+                                <thead>
+                                    <tr class="border-b">
+                                        <th class="text-left py-2">抽签人</th>
+                                        <th class="text-left py-2">抽中</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${record.participants.map(p => {
+                                        const target = record.participants.find(t => t.id === p.targetId);
+                                        return `
+                                            <tr class="border-b hover:bg-red-50">
+                                                <td class="py-2">${p.name}</td>
+                                                <td class="py-2">${target ? target.name : '未知'}</td>
+                                            </tr>
+                                        `;
+                                    }).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 p-4 flex justify-between">
+                        <div>
+                            <button class="view-record-btn bg-blue-500 hover:bg-blue-600 text-white py-1 px-4 rounded-full text-sm transition-all mr-2" data-id="${record.id}">
+                                <i class="fa fa-eye mr-1"></i> 查看记录
+                            </button>
+                            <button class="export-record-btn bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded-full text-sm transition-all" data-id="${record.id}">
+                                <i class="fa fa-download mr-1"></i> 导出记录
+                            </button>
+                        </div>
+                        <button class="delete-record-btn bg-red-500 hover:bg-red-600 text-white py-1 px-4 rounded-full text-sm transition-all" data-id="${record.id}">
+                            <i class="fa fa-trash mr-1"></i> 删除
+                        </button>
+                    </div>
+                `;
+                historyList.appendChild(recordCard);
+
+                // 添加事件监听
+                recordCard.querySelector('.view-record-btn').addEventListener('click', function() {
+                    const recordId = parseInt(this.getAttribute('data-id'));
+                    loadLotteryRecord(recordId);
+                });
+                
+                recordCard.querySelector('.export-record-btn').addEventListener('click', function() {
+                    const recordId = parseInt(this.getAttribute('data-id'));
+                    exportLotteryRecord(recordId);
+                });
+                
+                const deleteBtn = recordCard.querySelector('.delete-record-btn');
+                if (deleteBtn) {
+                    console.log('找到删除按钮，绑定事件');
+                    deleteBtn.addEventListener('click', function(e) {
+                        e.stopPropagation(); // 阻止事件冒泡
+                        e.preventDefault(); // 阻止默认行为
+                        console.log('删除按钮被点击');
+                        const recordId = parseInt(this.getAttribute('data-id'));
+                        console.log('删除记录ID:', recordId, '当前历史记录:', lotteryHistory.map(r => r.id));
+                        // 直接调用删除逻辑，不使用confirm
+                        lotteryHistory = lotteryHistory.filter(r => r.id !== recordId);
+                        console.log('删除后的历史记录:', lotteryHistory.map(r => r.id));
+                        updateHistoryDisplay();
+                        updateLocalStorage();
+                        showToast('记录删除成功！');
+                    });
+                } else {
+                    console.log('未找到删除按钮');
+                }
+            });
+        }
+
+        // 加载抽签记录
+        function loadLotteryRecord(recordId) {
+            const record = lotteryHistory.find(r => r.id === recordId);
+            if (!record) return;
+
+            if (confirm('加载此记录将覆盖当前数据，是否继续？')) {
+                participants = JSON.parse(JSON.stringify(record.participants));
+                currentParticipantCount = record.participantCount;
+                isLotteryCompleted = true;
+
+                // 更新界面
+                document.getElementById('participant-count').textContent = currentParticipantCount;
+                generateNameInputs();
+                for (let i = 0; i < participants.length; i++) {
+                    const nameInput = document.getElementById(`name-${i + 1}`);
+                    if (nameInput) {
+                        nameInput.value = participants[i].name;
+                    }
+                }
+
+                document.getElementById('lottery-results').classList.remove('hidden');
+                updateResultsDisplay();
+                updateSummaryTab();
+                document.getElementById('save-lottery-btn').disabled = false;
+
+                // 切换到抽签标签页
+                switchTab('lottery-tab');
+                
+                showToast('记录加载成功！');
+                updateLocalStorage();
+            }
+        }
+
+        // 导出抽签记录
+        function exportLotteryRecord(recordId) {
+            const record = lotteryHistory.find(r => r.id === recordId);
+            if (!record) return;
+
+            const exportData = {
+                ...record,
+                exportDate: new Date().toISOString(),
+                version: '1.0'
+            };
+
+            const dataStr = JSON.stringify(exportData, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(dataBlob);
+
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `${record.name.replace(/\s+/g, '_')}_${record.id}.json`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+
+            showToast('记录导出成功！');
+        }
+
+// 删除抽签记录函数已内联到事件监听器中
+
+        // 导入抽签记录
+        function importLotteryRecord() {
+            const fileInput = document.getElementById('import-file');
+            const file = fileInput.files[0];
+            
+            if (!file) {
+                alert('请选择要导入的JSON文件');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const importData = JSON.parse(e.target.result);
+
+                    // 验证数据格式
+                    if (!importData.id || !importData.name || !importData.participants) {
+                        throw new Error('无效的文件格式');
+                    }
+
+                    // 检查是否已存在相同ID的记录
+                    if (lotteryHistory.some(r => r.id === importData.id)) {
+                        importData.id = Date.now(); // 生成新ID
+                        importData.name = `${importData.name} (导入)`;
+                    }
+
+                    lotteryHistory.unshift(importData);
+
+                    // 限制历史记录数量
+                    if (lotteryHistory.length > 20) {
+                        lotteryHistory.pop();
+                    }
+
+                    closeImportModal();
+                    updateHistoryDisplay();
+                    updateLocalStorage();
+                    showToast('记录导入成功！');
+                } catch (error) {
+                    alert('导入失败：' + error.message);
+                }
+            };
+            
+            reader.onerror = function() {
+                alert('文件读取失败');
+            };
+            
+            reader.readAsText(file);
+        }
+
+        // 关闭保存弹窗
+        function closeSaveModal() {
+            document.getElementById('save-modal').style.display = 'none';
+            document.getElementById('save-form').reset();
+        }
+
+        // 关闭导入弹窗
+        function closeImportModal() {
+            document.getElementById('import-modal').style.display = 'none';
+            document.getElementById('import-file').value = '';
+        }
+
+        // 重置页面
+        function resetPage() {
+            if (confirm('确定要重置所有数据吗？此操作不可恢复。')) {
+                // 重置参与人数
+                currentParticipantCount = 11;
+                document.getElementById('participant-count').textContent = currentParticipantCount;
+                
+                // 重新生成姓名输入框
+                generateNameInputs();
+                
+                // 重置参与者数据
+                initializeParticipants();
+                
+                // 隐藏并清空抽签结果区域
+                const lotteryResults = document.getElementById('lottery-results');
+                lotteryResults.classList.add('hidden');
+                
+                // 清空抽签结果容器
+                const resultsContainer = document.getElementById('results-container');
+                resultsContainer.innerHTML = '';
+                
+                // 重置标签页
+                switchTab('lottery-tab');
+                
+                // 重置抽签完成状态
+                isLotteryCompleted = false;
+                
+                // 清空结果汇总页面的内容
+                const summaryTableBody = document.getElementById('summary-table-body');
+                summaryTableBody.innerHTML = `
+                    <tr>
+                        <td colspan="5" class="py-4 px-4 text-center text-gray-500">暂无抽签结果</td>
+                    </tr>
+                `;
+                
+                // 清空地址信息列表
+                const addressesList = document.getElementById('addresses-list');
+                addressesList.innerHTML = `
+                    <div class="col-span-2 bg-gray-50 rounded-lg p-4 text-center text-gray-500">
+                        暂无地址信息
+                    </div>
+                `;
+                
+                // 清空图片画廊
+                const imagesGallery = document.getElementById('images-gallery');
+                imagesGallery.innerHTML = `
+                    <div class="col-span-4 bg-gray-50 rounded-lg p-4 text-center text-gray-500">
+                        暂无礼物图片
+                    </div>
+                `;
+                
+                // 移除所有庆祝特效元素
+                const confettiElements = document.querySelectorAll('.confetti');
+                confettiElements.forEach(element => {
+                    element.remove();
+                });
+                
+                // 清空本地存储
+                localStorage.removeItem('newYearLotteryData');
+                
+                // 显示重置成功提示
+                showToast('重置成功！');
+            }
+        }
+        
+        // 切换标签页
+        function switchTab(tabId) {
+            // 隐藏所有标签页内容
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // 移除所有标签按钮的活动状态
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // 显示选中的标签页内容
+            document.getElementById(tabId).classList.add('active');
+            
+            // 添加选中标签按钮的活动状态
+            document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+            
+            // 如果切换到结果汇总标签页，更新汇总内容
+            if (tabId === 'results-tab') {
+                updateSummaryTab();
+            }
+        }
+        
+        // 更新汇总标签页
+        function updateSummaryTab() {
+            // 更新汇总表格
+            updateSummaryTable();
+            
+            // 更新地址信息
+            updateAddressesList();
+            
+            // 更新图片画廊
+            updateImagesGallery();
+        }
+        
+        // 更新汇总表格
+        function updateSummaryTable() {
+            const tableBody = document.getElementById('summary-table-body');
+            tableBody.innerHTML = '';
+            
+            if (participants.length === 0 || !isLotteryCompleted) {
+                tableBody.innerHTML = `
+                    <tr>
+                        <td colspan="5" class="py-4 px-4 text-center text-gray-500">暂无抽签结果</td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            participants.forEach(participant => {
+                const targetParticipant = participants.find(p => p.id === participant.targetId);
+                
+                const row = document.createElement('tr');
+                row.className = 'border-b border-gray-200 hover:bg-red-50';
+                row.innerHTML = `
+                    <td class="py-3 px-4">${participant.id}</td>
+                    <td class="py-3 px-4 font-medium">${participant.name}</td>
+                    <td class="py-3 px-4">${targetParticipant.id}</td>
+                    <td class="py-3 px-4 font-medium">${targetParticipant.name}</td>
+                    <td class="py-3 px-4">
+                        <div class="flex space-x-2">
+                            <button class="edit-address-btn bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded-full text-xs transition-all" data-id="${participant.id}">
+                                <i class="fa fa-map-marker mr-1"></i> 地址
+                            </button>
+                            <button class="upload-image-btn bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded-full text-xs transition-all" data-id="${participant.id}">
+                                <i class="fa fa-image mr-1"></i> 图片
+                            </button>
+                        </div>
+                    </td>
+                `;
+                
+                tableBody.appendChild(row);
+                
+                // 添加事件监听
+                row.querySelector('.edit-address-btn').addEventListener('click', function() {
+                    const participantId = parseInt(this.getAttribute('data-id'));
+                    openAddressModal(participantId);
+                });
+                
+                row.querySelector('.upload-image-btn').addEventListener('click', function() {
+                    const participantId = parseInt(this.getAttribute('data-id'));
+                    openImageModal(participantId);
+                });
+            });
+        }
+        
+        // 更新地址信息列表
+        function updateAddressesList() {
+            // 直接获取最新的DOM元素引用
+            const addressesList = document.getElementById('addresses-list');
+            
+            // 清空内容
+            addressesList.innerHTML = '';
+            
+            // 过滤有地址的参与者
+            const participantsWithAddress = participants.filter(p => p.address);
+            
+            if (participantsWithAddress.length === 0) {
+                addressesList.innerHTML = `
+                    <div class="col-span-2 bg-gray-50 rounded-lg p-4 text-center text-gray-500">
+                        暂无地址信息
+                    </div>
+                `;
+                return;
+            }
+            
+            // 重新渲染地址卡片
+            participantsWithAddress.forEach(participant => {
+                const addressCard = document.createElement('div');
+                addressCard.className = 'bg-white rounded-lg shadow-md p-4 border-l-4 border-blue-500';
+                addressCard.innerHTML = `
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center">
+                            <div class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 font-bold">${participant.id}</div>
+                            <h3 class="text-lg font-bold text-blue-700">${participant.name}</h3>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-xs text-gray-500 mr-2">抽中: ${participants.find(p => p.id === participant.targetId).name}</span>
+                            <button class="delete-address-btn w-5 h-5 rounded-full bg-gray-100 text-gray-400 hover:bg-gray-200 hover:text-gray-600 flex items-center justify-center focus:outline-none -mt-1 -mr-1" data-id="${participant.id}">
+                                <i class="fa fa-times" style="font-size: 10px;"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="bg-blue-50 rounded-lg p-3">
+                        <p class="mb-1"><span class="font-medium">收货人:</span> ${participant.address.recipient}</p>
+                        <p class="mb-1"><span class="font-medium">电话:</span> ${participant.address.phone}</p>
+                        <p><span class="font-medium">地址:</span> ${participant.address.detail}</p>
+                    </div>
+                    <div class="mt-3 flex justify-end">
+                        <button class="edit-address-btn bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded-full text-xs transition-all" data-id="${participant.id}">
+                            <i class="fa fa-pencil mr-1"></i> 编辑
+                        </button>
+                    </div>
+                `;
+                
+                addressesList.appendChild(addressCard);
+                
+                // 为编辑按钮绑定事件
+                const editBtn = addressCard.querySelector('.edit-address-btn');
+                editBtn.onclick = function() {
+                    openAddressModal(participant.id);
+                };
+                
+                // 为删除按钮绑定事件
+                const deleteBtn = addressCard.querySelector('.delete-address-btn');
+                if (deleteBtn) {
+                    deleteBtn.onclick = function(event) {
+                        event.stopPropagation(); // 阻止事件冒泡
+                        const participantId = parseInt(this.getAttribute('data-id'));
+                        console.log('删除按钮被点击，参与者ID:', participantId);
+                        deleteAddress(participantId);
+                    };
+                } else {
+                    console.error('未找到删除按钮');
+                }
+            });
+        }
+        
+        // 删除地址信息
+        function deleteAddress(participantId) {
+            console.log('执行删除函数，参与者ID:', participantId);
+            const participant = participants.find(p => p.id === participantId);
+            if (!participant) {
+                console.log('未找到参与者');
+                return;
+            }
+        
+            // 直接删除，不使用confirm
+            console.log('删除前的参与者数据:', JSON.stringify(participant));
+            delete participant.address;
+            if (participant.phone) delete participant.phone;
+            console.log('删除后的参与者数据:', JSON.stringify(participant));
+        
+            // 更新本地存储
+            updateLocalStorage();
+        
+            // 重新渲染地址列表
+            updateAddressesList();
+        
+            // 显示删除成功提示
+            showToast('地址信息已删除');
+        
+            // 更新汇总标签页
+            updateSummaryTab();
+        }
+
+        // 更新图片画廊
+        function updateImagesGallery() {
+            const imagesGallery = document.getElementById('images-gallery');
+            imagesGallery.innerHTML = '';
+            
+            const participantsWithImages = participants.filter(p => p.images && p.images.length > 0);
+            
+            if (participantsWithImages.length === 0) {
+                imagesGallery.innerHTML = `
+                    <div class="col-span-4 bg-gray-50 rounded-lg p-4 text-center text-gray-500">
+                        暂无礼物图片
+                    </div>
+                `;
+                return;
+            }
+            
+            participantsWithImages.forEach(participant => {
+                participant.images.forEach((imageUrl, index) => {
+                    const imageCard = document.createElement('div');
+                    imageCard.className = 'bg-white rounded-lg shadow-md overflow-hidden card-hover';
+                    imageCard.innerHTML = `
+                        <div class="relative">
+                            <img src="${imageUrl}" alt="${participant.name}的礼物" class="w-full h-48 object-cover">
+                            <div class="absolute top-2 right-2 bg-black bg-opacity-50 text-white rounded-full px-2 py-1 text-xs">
+                                ${participant.id}号 ${participant.name}
+                            </div>
+                        </div>
+                        <div class="p-3 text-center">
+                            <p class="text-sm text-gray-600">送给 ${participants.find(p => p.id === participant.targetId).name} 的礼物</p>
+                        </div>
+                    `;
+                    
+                    imagesGallery.appendChild(imageCard);
+                });
+            });
+        }
+        
+        // 打开地址填写弹窗
+        function openAddressModal(participantId) {
+            const participant = participants.find(p => p.id === participantId);
+            if (!participant) return;
+            
+            // 填充表单数据
+            document.getElementById('address-participant-id').value = participantId;
+            
+            if (participant.address) {
+                document.getElementById('recipient').value = participant.address.recipient;
+                document.getElementById('phone').value = participant.address.phone;
+                document.getElementById('address-detail').value = participant.address.detail;
+            } else {
+                document.getElementById('recipient').value = participant.name;
+                document.getElementById('phone').value = '';
+                document.getElementById('address-detail').value = '';
+            }
+            
+            // 显示弹窗
+            document.getElementById('address-modal').style.display = 'block';
+        }
+        
+        // 关闭地址填写弹窗
+        function closeAddressModal() {
+            document.getElementById('address-modal').style.display = 'none';
+        }
+        
+        // 保存地址信息
+        function saveAddress(event) {
+            event.preventDefault();
+            
+            const participantId = parseInt(document.getElementById('address-participant-id').value);
+            const participant = participants.find(p => p.id === participantId);
+            if (!participant) return;
+            
+            // 获取表单数据
+            const recipient = document.getElementById('recipient').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const detail = document.getElementById('address-detail').value.trim();
+            
+            // 验证表单数据
+            if (!recipient || !phone || !detail) {
+                alert('请填写完整的地址信息');
+                return;
+            }
+            
+            // 保存地址信息
+            participant.address = {
+                recipient,
+                phone,
+                detail
+            };
+            
+            // 确保phone属性也被设置
+            participant.phone = phone;
+            
+            // 关闭弹窗
+            closeAddressModal();
+            
+            // 先更新本地存储，确保数据持久化
+            updateLocalStorage();
+            
+            // 强制重新渲染地址列表
+            setTimeout(() => {
+                updateAddressesList();
+            }, 100);
+            
+            // 显示保存成功提示
+            showToast('地址保存成功！');
+            
+            // 更新汇总标签页（这会再次调用updateAddressesList，但为了保持原有逻辑的完整性）
+            updateSummaryTab();
+        }
+        
+        // 清空地址表单
+        function clearAddressForm() {
+            // 清空联系电话和详细地址字段
+            document.getElementById('phone').value = '';
+            document.getElementById('address-detail').value = '';
+            
+            // 显示提示信息
+            showToast('已清空联系电话和详细地址');
+        }
+        
+        // 打开图片上传弹窗
+        function openImageModal(participantId) {
+            const participant = participants.find(p => p.id === participantId);
+            if (!participant) return;
+            
+            // 填充表单数据
+            document.getElementById('image-participant-id').value = participantId;
+            
+            // 清空图片预览
+            document.getElementById('image-previews').innerHTML = '';
+            
+            // 清空选中的图片
+            selectedImages = [];
+            
+            // 如果已有上传的图片，显示预览
+            if (participant.images && participant.images.length > 0) {
+                const previewContainer = document.getElementById('image-previews');
+                
+                participant.images.forEach((imageUrl, index) => {
+                    const preview = document.createElement('div');
+                    preview.className = 'image-preview';
+                    preview.innerHTML = `
+                        <img src="${imageUrl}" alt="已上传的图片">
+                        <span class="remove-image" data-index="${index}">&times;</span>
+                    `;
+                    
+                    previewContainer.appendChild(preview);
+                    
+                    // 添加删除事件监听
+                    preview.querySelector('.remove-image').addEventListener('click', function() {
+                        const imageIndex = parseInt(this.getAttribute('data-index'));
+                        participant.images.splice(imageIndex, 1);
+                        preview.remove();
+                        
+                        // 更新本地存储
+                        updateLocalStorage();
+                        
+                        // 显示删除成功提示
+                        showToast('图片删除成功！');
+                    });
+                });
+            }
+            
+            // 显示弹窗
+            document.getElementById('image-modal').style.display = 'block';
+        }
+        
+        // 关闭图片上传弹窗
+        function closeImageModal() {
+            document.getElementById('image-modal').style.display = 'none';
+        }
+        
+        // 处理图片选择
+        function handleImageSelect(event) {
+            const files = event.target.files;
+            if (!files.length) return;
+            
+            const previewContainer = document.getElementById('image-previews');
+            
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                
+                // 检查文件类型
+                if (!file.type.match('image.*')) {
+                    continue;
+                }
+                
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    const preview = document.createElement('div');
+                    preview.className = 'image-preview';
+                    preview.innerHTML = `
+                        <img src="${e.target.result}" alt="预览图片">
+                        <span class="remove-image" data-index="${selectedImages.length}">&times;</span>
+                    `;
+                    
+                    previewContainer.appendChild(preview);
+                    
+                    // 添加到选中的图片数组
+                    selectedImages.push(e.target.result);
+                    
+                    // 添加删除事件监听
+                    preview.querySelector('.remove-image').addEventListener('click', function() {
+                        const imageIndex = parseInt(this.getAttribute('data-index'));
+                        selectedImages.splice(imageIndex, 1);
+                        preview.remove();
+                        
+                        // 更新其他图片的索引
+                        document.querySelectorAll('.image-preview .remove-image').forEach((btn, index) => {
+                            btn.setAttribute('data-index', index);
+                        });
+                    });
+                };
+                
+                reader.readAsDataURL(file);
+            }
+            
+            // 清空文件输入，允许重新选择相同的文件
+            event.target.value = '';
+        }
+        
+        // 保存图片
+        function saveImages(event) {
+            event.preventDefault();
+            
+            const participantId = parseInt(document.getElementById('image-participant-id').value);
+            const participant = participants.find(p => p.id === participantId);
+            if (!participant) return;
+            
+            // 如果没有选择新图片，直接关闭弹窗
+            if (selectedImages.length === 0) {
+                closeImageModal();
+                return;
+            }
+            
+            // 初始化图片数组
+            if (!participant.images) {
+                participant.images = [];
+            }
+            
+            // 添加新图片
+            participant.images = [...participant.images, ...selectedImages];
+            
+            // 关闭弹窗
+            closeImageModal();
+            
+            // 显示上传成功提示
+            showToast('图片上传成功！');
+            
+            // 更新汇总标签页
+            updateSummaryTab();
+            
+            // 更新本地存储
+            updateLocalStorage();
+        }
+        
+
+        // 显示提示消息
+        function showToast(message) {
+            // 创建提示元素
+            const toast = document.createElement('div');
+            toast.className = 'fixed top-4 right-4 bg-red-600 text-white px-4 py-2 rounded-lg shadow-lg z-50 transform transition-all duration-300 translate-x-full opacity-0';
+            toast.textContent = message;
+            
+            // 添加到页面
+            document.body.appendChild(toast);
+            
+            // 显示提示
+            setTimeout(() => {
+                toast.classList.remove('translate-x-full', 'opacity-0');
+            }, 100);
+            
+            // 3秒后隐藏提示
+            setTimeout(() => {
+                toast.classList.add('translate-x-full', 'opacity-0');
+                
+                // 动画结束后移除元素
+                setTimeout(() => {
+                    toast.remove();
+                }, 300);
+            }, 3000);
+        }
+        
+        // 更新本地存储
+        function updateLocalStorage() {
+            // 获取所有姓名
+            for (let i = 1; i <= currentParticipantCount; i++) {
+                const nameInput = document.getElementById(`name-${i}`);
+                if (nameInput) {
+                    const name = nameInput.value.trim();
+                    const participant = participants.find(p => p.id === i);
+                    if (participant) {
+                        participant.name = name;
+                    }
+                }
+            }
+            
+            // 保存到本地存储
+            const data = {
+                participants,
+                currentParticipantCount,
+                isLotteryCompleted,
+                isLotteryLocked,
+                lotteryHistory
+            };
+            
+            localStorage.setItem('newYearLotteryData', JSON.stringify(data));
+        }
+        
+        // 从本地存储加载数据
+        function loadDataFromLocalStorage() {
+            const storedData = localStorage.getItem('newYearLotteryData');
+            if (!storedData) return;
+            
+            try {
+                const data = JSON.parse(storedData);
+                
+                // 恢复参与人数、锁定状态和历史记录
+                currentParticipantCount = data.currentParticipantCount || 11;
+                isLotteryLocked = data.isLotteryLocked || false;
+                lotteryHistory = data.lotteryHistory || [];
+                document.getElementById('participant-count').textContent = currentParticipantCount;
+                
+                // 生成姓名输入框
+                generateNameInputs();
+                
+                // 恢复参与者数据
+                participants = data.participants || [];
+                
+                // 恢复抽签完成状态
+                isLotteryCompleted = data.isLotteryCompleted || false;
+                
+                // 填充姓名输入框
+                participants.forEach(participant => {
+                    const nameInput = document.getElementById(`name-${participant.id}`);
+                    if (nameInput) {
+                        nameInput.value = participant.name;
+                    }
+                });
+                
+                // 如果抽签已完成，显示结果
+                if (isLotteryCompleted) {
+                    document.getElementById('lottery-results').classList.remove('hidden');
+                    
+                    // 生成抽签结果
+                    const resultsContainer = document.getElementById('results-container');
+                    resultsContainer.innerHTML = '';
+                    
+                    participants.forEach(participant => {
+                        const targetParticipant = participants.find(p => p.id === participant.targetId);
+                        
+                        // 创建结果卡片
+                        const resultCard = document.createElement('div');
+                        resultCard.className = 'bg-white rounded-lg shadow-md p-4 border-l-4 border-red-500 card-hover';
+                        resultCard.innerHTML = `
+                            <div class="flex items-center mb-3">
+                                <div class="bg-red-600 text-white rounded-full w-10 h-10 flex items-center justify-center mr-3 font-bold text-lg">${participant.id}</div>
+                                <h3 class="text-lg font-bold text-red-700">${participant.name}</h3>
+                            </div>
+                            <div class="flex items-center justify-center my-4">
+                                <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/a1dc5ac02c1941c086226008629fde8c~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=20260202114109522AE5F5797C2D3C6806&rrcfp=f06b921b&x-expires=1772595694&x-signature=Tc23SB2pR3vQ4%2B2qInJrpDq8dwk%3D" alt="抽签筒" class="w-20 h-20 object-contain">
+                            </div>
+                            <div class="text-center mb-3">
+                                <p class="text-gray-600">抽中了</p>
+                                <div class="flex items-center justify-center mt-2">
+                                    <div class="bg-red-600 text-white rounded-full w-10 h-10 flex items-center justify-center mr-3 font-bold text-lg">${targetParticipant.id}</div>
+                                    <h3 class="text-lg font-bold text-red-700">${targetParticipant.name}</h3>
+                                </div>
+                            </div>
+                            <div class="flex justify-between mt-4">
+                                <button class="edit-address-btn bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded-full text-sm transition-all" data-id="${participant.id}">
+                                    <i class="fa fa-map-marker mr-1"></i> 填写地址
+                                </button>
+                                <button class="upload-image-btn bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded-full text-sm transition-all" data-id="${participant.id}">
+                                    <i class="fa fa-image mr-1"></i> 上传图片
+                                </button>
+                            </div>
+                        `;
+                        
+                        // 添加到结果容器
+                        resultsContainer.appendChild(resultCard);
+                        
+                        // 添加事件监听
+                        resultCard.querySelector('.edit-address-btn').addEventListener('click', function() {
+                            const participantId = parseInt(this.getAttribute('data-id'));
+                            openAddressModal(participantId);
+                        });
+                        
+                        resultCard.querySelector('.upload-image-btn').addEventListener('click', function() {
+                            const participantId = parseInt(this.getAttribute('data-id'));
+                            openImageModal(participantId);
+                        });
+                    });
+                    
+                    // 更新汇总标签页
+                    updateSummaryTab();
+                }
+                
+                // 更新锁定按钮状态
+                const lockBtn = document.getElementById('lock-btn');
+                const startLotteryBtn = document.getElementById('start-lottery-btn');
+                const saveLotteryBtn = document.getElementById('save-lottery-btn');
+                if (isLotteryLocked) {
+                    lockBtn.innerHTML = '<i class="fa fa-unlock mr-2"></i> 抽签解锁';
+                    lockBtn.classList.remove('bg-yellow-500', 'hover:bg-yellow-600');
+                    lockBtn.classList.add('bg-green-500', 'hover:bg-green-600');
+                    startLotteryBtn.disabled = true;
+                    startLotteryBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                } else {
+                    lockBtn.innerHTML = '<i class="fa fa-lock mr-2"></i> 抽签锁定';
+                    lockBtn.classList.remove('bg-green-500', 'hover:bg-green-600');
+                    lockBtn.classList.add('bg-yellow-500', 'hover:bg-yellow-600');
+                    startLotteryBtn.disabled = false;
+                    startLotteryBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                }
+                
+                // 更新保存按钮状态
+                saveLotteryBtn.disabled = !isLotteryCompleted;
+                
+                // 更新历史记录显示
+                updateHistoryDisplay();
+            } catch (error) {
+                console.error('加载本地存储数据失败:', error);
+                // 清除损坏的数据
+                localStorage.removeItem('newYearLotteryData');
+            }
+        }
+    </script>
+
+</body></html>
